@@ -3,6 +3,7 @@
 #include <iomanip>
 using namespace std;
 
+// bank account
 class bank_account{
 	string name_of_depos;
 	long int acc_num;
