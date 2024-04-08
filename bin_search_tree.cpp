@@ -127,7 +127,7 @@ class Bin_search_tree{
 		        // Copy the smallest's data to the current node
 		        current->data = smallest->data;
 		
-		        // Delete the successor node (which can only have one right child at most)
+		        // Delete the smallest node (which can only have one right child at most)
 		        if (smallest->parent->left == smallest){
 		            smallest->parent->left = smallest->right;
 				} 
