@@ -16,20 +16,21 @@ class Bin_search_tree{
 	node *root;
 	node *current;
 	
+	// Display function using in-order traversal
+	// no need to be public method
+	void displayInOrder(node* root) {
+	    if (root == NULL){
+	        return;
+		}
+
+	    displayInOrder(root->left);
+	    cout << root->data << ", ";
+        displayInOrder(root->right);
+	}
+	
 	public:
 		Bin_search_tree() {
 	        root = NULL; // Initialize root to NULL in the constructor
-	    }
-	    
-	    // Display function using in-order traversal
-	    void displayInOrder(node* root) {
-	        if (root == NULL){
-	            return;
-			}
-	
-	        displayInOrder(root->left);
-	        cout << root->data << ", ";
-	        displayInOrder(root->right);
 	    }
 	
 	    // Wrapper function to start in-order traversal from the root
@@ -43,6 +44,7 @@ class Bin_search_tree{
 	        node *newNode;
 	        newNode = new node;
 	        newNode->data = data;
+	        
 	        newNode->parent = NULL;
 	        newNode->left = NULL;
 	        newNode->right = NULL;
@@ -60,6 +62,7 @@ class Bin_search_tree{
 	                    newNode->parent = current;
 	                    break; // Inserted the node, so exit loop
 	                }
+	                
 	                current = current->left;
 	            } else {
 	                if (current->right == NULL) {
@@ -67,6 +70,7 @@ class Bin_search_tree{
 	                    newNode->parent = current;
 	                    break; // Inserted the node, so exit loop
 	                }
+	                
 	                current = current->right;
 	            }
 	        }
@@ -99,10 +103,10 @@ class Bin_search_tree{
 		        if (parent == NULL){ // Deleting root
 		            root = child;
 		    	} 
-			else if (parent->left == current){
+				else if (parent->left == current){
 		            parent->left = child;
 				} 
-			else{
+				else{
 		            parent->right = child;
 				}
 				
@@ -123,11 +127,11 @@ class Bin_search_tree{
 		        // Copy the smallest's data to the current node
 		        current->data = smallest->data;
 		
-		        // Delete the smallest node (which can only have one right child at most)
+		        // Delete the successor node (which can only have one right child at most)
 		        if (smallest->parent->left == smallest){
 		            smallest->parent->left = smallest->right;
 				} 
-			else{
+				else{
 		            smallest->parent->right = smallest->right;
 				}
 		
