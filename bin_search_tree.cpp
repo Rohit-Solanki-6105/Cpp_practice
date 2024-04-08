@@ -17,7 +17,7 @@ class Bin_search_tree{
 	node *current;
 	
 	public:
-		Bin_search_tree() {
+	    Bin_search_tree() {
 	        root = NULL; // Initialize root to NULL in the constructor
 	    }
 	    
@@ -25,7 +25,7 @@ class Bin_search_tree{
 	    void displayInOrder(node* root) {
 	        if (root == NULL){
 	            return;
-			}
+		}
 	
 	        displayInOrder(root->left);
 	        cout << root->data << ", ";
@@ -81,10 +81,10 @@ class Bin_search_tree{
 		        parent = current;
 		        if (data < current->data){
 		            current = current->left;
-				}
+			}
 		        else{
 		            current = current->right;
-				}
+			}
 		    }
 		
 		    // If the node was not found
@@ -100,13 +100,13 @@ class Bin_search_tree{
 		            root = child;
 		    	} else if (parent->left == current){
 		            parent->left = child;
-				} else{
+			} else{
 		            parent->right = child;
-				}
+			}
 				
 		        if (child != NULL){ // Update the parent pointer of the child node
 		            child->parent = parent;
-				}
+			}
 				
 		        delete current;
 		    }
@@ -116,7 +116,7 @@ class Bin_search_tree{
 		        node* smallest = current->right;
 		        while (smallest->left != NULL){
 		            smallest = smallest->left;
-				}
+			}
 		        
 		        // Copy the smallest's data to the current node
 		        current->data = smallest->data;
@@ -124,13 +124,13 @@ class Bin_search_tree{
 		        // Delete the successor node (which can only have one right child at most)
 		        if (smallest->parent->left == smallest){
 		            smallest->parent->left = smallest->right;
-				} else{
+			} else{
 		            smallest->parent->right = smallest->right;
-				}
+			}
 		
 		        if (smallest->right != NULL){
 		            smallest->right->parent = smallest->parent;
-				}
+			}
 				
 		        delete smallest;
 		    }
