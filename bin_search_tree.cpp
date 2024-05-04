@@ -28,6 +28,27 @@ class Bin_search_tree{
         displayInOrder(root->right);
 	}
 	
+	void preorder(node *root){
+		if (root == NULL){
+	        return;
+		}
+
+	    cout << root->data << ", ";
+	    displayInOrder(root->left);
+        displayInOrder(root->right);
+	}
+	
+	
+	void postorder(node *root){
+		if (root == NULL){
+	        return;
+		}
+
+	    displayInOrder(root->left);
+        displayInOrder(root->right);
+	    cout << root->data << ", ";
+	}
+	
 	public:
 		Bin_search_tree() {
 	        root = NULL; // Initialize root to NULL in the constructor
@@ -35,8 +56,16 @@ class Bin_search_tree{
 	
 	    // Wrapper function to start in-order traversal from the root
 	    void display() {
-	    	cout<<"\n| ";
+	    	cout<<"\nIn order = | ";
 	        displayInOrder(root);
+	        cout<<" |"<< endl;
+	        
+	    	cout<<"\nPost order = | ";
+	        postorder(root);
+	        cout<<" |"<< endl;
+	        
+	    	cout<<"\nPre order = | ";
+	        prerder(root);
 	        cout<<" |\n"<< endl;
 	    }
 	    
