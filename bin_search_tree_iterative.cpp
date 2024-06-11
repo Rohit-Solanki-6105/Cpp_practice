@@ -49,35 +49,76 @@ class Bin_search_tree{
 //        }
 //    }
 	
-	// using stack
-	void displayInOrder() {
-        if (!root)
-            return;
-
-        node* current = root;
-        stack<node*> s;
-        while (current != NULL || !s.empty()) {
-            while (current != NULL) {
-                s.push(current);
-                current = current->left;
-            }
-            current = s.top();
-            s.pop();
-            cout << current->data << ", ";
-            current = current->right;
-        }
-    }
 	
 	public:
 		Bin_search_tree() {
 	        root = NULL; // Initialize root to NULL in the constructor
 	    }
+
+	void inorder() {
+	        if (root == NULL)
+	            return;
+	
+	        node* curr = root;
+	        stack<node*> s;
+	        while (curr != NULL || !s.empty()) {
+	            while (curr != NULL) {
+	                s.push(curr);
+	                curr = curr->left;
+	            }
+	            curr = s.top();
+	            s.pop();
+	            cout << curr->data << ", ";
+	            curr = curr->right;
+        	}	
+		}
+		
+		
+	void postorder() {
+            if (root == NULL)
+                return;
+    
+            stack<node*> s1, s2;
+            s1.push(root);
+            while (!s1.empty()) {
+                node* curr = s1.top();
+                s1.pop();
+                s2.push(curr);
+                if (curr->left)
+                    s1.push(curr->left);
+                if (curr->right)
+                    s1.push(curr->right);
+            }
+            while (!s2.empty()) {
+                cout << s2.top()->data << " ";
+                s2.pop();
+            }
+        }
+
+        void preorder() {
+            if (root == NULL)
+                return;
+    
+            stack<node*> s;
+            s.push(root);
+            while (!s.empty()) {
+                node* curr = s.top();
+                s.pop();
+                cout << curr->data << " ";
+                if (curr->right)
+                    s.push(curr->right);
+                if (curr->left)
+                    s.push(curr->left);
+            }
+        }
 	
 	    // Wrapper function to start in-order traversal from the root
 	    void display() {
 	    	cout<<"\n| ";
 //	        displayInOrder(root);
-			displayInOrder();
+		cout<<"In order: "; inorder(); cout<<"\n";
+		cout<<"Post order: "; postorder(); cout<<"\n";
+		cout<<"Pre order: "; preorder(); cout<<"\n";
 	        cout<<" |\n"<< endl;
 	    }
 	    
