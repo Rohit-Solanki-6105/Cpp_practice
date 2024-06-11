@@ -55,7 +55,7 @@ class Bin_search_tree{
 	        root = NULL; // Initialize root to NULL in the constructor
 	    }
 
-	void inorder() {
+		void inorder() {
 	        if (root == NULL)
 	            return;
 	
@@ -74,7 +74,7 @@ class Bin_search_tree{
 		}
 		
 		
-	void postorder() {
+		void postorder() {
             if (root == NULL)
                 return;
     
@@ -90,7 +90,7 @@ class Bin_search_tree{
                     s1.push(curr->right);
             }
             while (!s2.empty()) {
-                cout << s2.top()->data << " ";
+                cout << s2.top()->data << ", ";
                 s2.pop();
             }
         }
@@ -104,7 +104,7 @@ class Bin_search_tree{
             while (!s.empty()) {
                 node* curr = s.top();
                 s.pop();
-                cout << curr->data << " ";
+                cout << curr->data << ", ";
                 if (curr->right)
                     s.push(curr->right);
                 if (curr->left)
@@ -114,12 +114,10 @@ class Bin_search_tree{
 	
 	    // Wrapper function to start in-order traversal from the root
 	    void display() {
-	    	cout<<"\n| ";
 //	        displayInOrder(root);
 		cout<<"In order: "; inorder(); cout<<"\n";
 		cout<<"Post order: "; postorder(); cout<<"\n";
 		cout<<"Pre order: "; preorder(); cout<<"\n";
-	        cout<<" |\n"<< endl;
 	    }
 	    
 	    void insert(int data) {
@@ -280,134 +278,3 @@ int main(){
 	getch();
 	return 0;
 }
-
-/*
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>1
------------------------------
-Data: 1
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>1
------------------------------
-Data: 5
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>1
------------------------------
-Data: 2
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>99
------------------------------
-
-| 1, 2, 5,  |
-
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>1
------------------------------
-Data: 8
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>99
------------------------------
-
-| 1, 2, 5, 8,  |
-
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>1
------------------------------
-Data: 3
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>99
------------------------------
-
-| 1, 2, 3, 5, 8,  |
-
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>1
------------------------------
-Data: 4
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>99
------------------------------
-
-| 1, 2, 3, 4, 5, 8,  |
-
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>2
------------------------------
-Data: 2
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>99
------------------------------
-
-| 1, 3, 4, 5, 8,  |
-
-
------------------------------
-1. Insert                     |
-2. delete data                |
-99. Display All               |
-0. exit                       |
->>>0
------------------------------
-Exiting...
-
-*/
