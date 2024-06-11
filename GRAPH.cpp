@@ -164,6 +164,123 @@ class Graph {
 	        }
 	        delete[] matrix;
 	    }
+		
+		void bfsTraversal(char startVertex) {
+		    List* startList = findVertex(startVertex);
+		    if (startList == nullptr) {
+		      cout << "Vertex " << startVertex << " not found." << endl;
+		      return;
+		    }
+		
+		    queue<List*> vertexQueue;
+		    bool visited[length] = {false};
+		
+		    vertexQueue.push(startList);
+		    visited[findIndex(getVertices(), startVertex, length)] = true;
+		
+		    while (!vertexQueue.empty()) {
+		      List* currentList = vertexQueue.front();
+		      vertexQueue.pop();
+		
+		      cout << currentList->vertex << " ";
+		
+		      node* currentNode = currentList->down;
+		      while (currentNode != nullptr) {
+		        int toIndex = findIndex(getVertices(), currentNode->vertex, length);
+		        if (!visited[toIndex]) {
+		          visited[toIndex] = true;
+		          vertexQueue.push(findVertex(currentNode->vertex));
+		        }
+		        currentNode = currentNode->down;
+		      }
+		    }
+		
+		    cout << endl;
+		}
+		
+		void dfsTraversal(char startVertex) {
+		    List* startList = findVertex(startVertex);
+		    if (startList == nullptr) {
+		      cout << "Vertex " << startVertex << " not found." << endl;
+		      return;
+		    }
+		
+		    stack<List*> vertexStack;
+		    bool visited[length] = {false};
+		
+		    vertexStack.push(startList);
+		    visited[findIndex(getVertices(), startVertex, length)] = true;
+		
+		    while (!vertexStack.empty()) {
+		      List* currentList = vertexStack.top();
+		      vertexStack.pop();
+		
+		      cout << currentList->vertex << " ";
+		
+		      node* currentNode = currentList->down;
+		      while (currentNode != nullptr) {
+		        int toIndex = findIndex(getVertices(), currentNode->vertex, length);
+		        if (!visited[toIndex]) {
+		          visited[toIndex] = true;
+		          vertexStack.push(findVertex(currentNode->vertex));
+		        }
+		        currentNode = currentNode->down;
+		      }
+		    }
+		
+		    cout << endl;
+		}
+		
+		// Delete a vertex and its edges
+		void deleteVertex(char vertex) {
+		    List* vertexList = findVertex(vertex);
+		    if (vertexList == nullptr) {
+		      cout << "Vertex " << vertex << " not found." << endl;
+		      return;
+		    }
+		
+		    // Remove the vertex from the linked list (if it's the head)
+		    if (vertexList == head) {
+		      head = head->next;
+		      delete vertexList;
+		      length--;
+		    } else {
+		      List* currentList = head;
+		      while (currentList->next != nullptr && currentList->next->vertex != vertex) {
+		        currentList = currentList->next;
+		      }
+		      if (currentList->next != nullptr) {
+		        List* temp = currentList->next;
+		        currentList->next = temp->next;
+		        delete temp;
+		        length--;
+		      }
+		    }
+		
+		    // Remove edges from other vertices pointing to the deleted vertex
+		    currentList = head;
+		    while (currentList != nullptr) {
+		      	node* prevNode = nullptr;
+		      	node* currentNode = currentList->down;
+		      	while (currentNode != nullptr) {
+		        	if (currentNode->vertex == vertex) {
+			        	if (prevNode == nullptr) {
+			            	currentList->down = currentNode->down;
+			        	} 
+						else {
+			            	prevNode->down = currentNode->down;
+			        	}
+			        	delete currentNode;
+			        	currentNode = (prevNode == nullptr) ? currentList->down : prevNode->down;
+		        	} 
+					else {
+		          		prevNode = currentNode;
+		          		currentNode = currentNode->down;
+		        	}
+		      	}
+		      	currentList = currentList->next;
+		    }
+		}
 };
 
 int main() {
